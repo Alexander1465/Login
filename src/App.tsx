@@ -1,10 +1,10 @@
 import React from 'react'
-import Login from './pages/Login'
-import './App.css'
+import Login from "./pages/Login"
 import Home from './pages/Home'
 import Reports from './pages/Reports'
-import Error from './pages/Error'
 import {createBrowserRouter, RouterProvider} from 'react-router-dom'
+import Error from "./pages/Error";
+
 
 const router = createBrowserRouter([
   {
@@ -22,16 +22,15 @@ const router = createBrowserRouter([
       {
         path: 'Reports',
         element: <Reports/>
-      }
-    ]
+      },
+    ],
   },
- ]);
+]);
 
+function App() {
+  return (
+    <RouterProvider router={router}/>
+  );
+}
 
-   function App() {
-    return (
-    <RouterProvider router={router} />
-    )
-   }
-   export default App
-
+export default App

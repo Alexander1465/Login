@@ -5,9 +5,10 @@ import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
 import { useNavigate } from 'react-router-dom'
 import Home from './Home';
+import { authActions } from '../store/authSlice';
+import { useDispatch } from 'react-redux';
 
 function Login() {
-
     const [data, setData] = React.useState({
         usuario: '', 
         constraseña: '',
@@ -17,23 +18,25 @@ function Login() {
       const bduser ='alexander'
       const bdpasswd ='1234'
       const navigate = useNavigate()
+      const dispatch = useDispatch()
 
 
       const handleSubmit = (e:any) => {
         e.preventDefault()
         if (data.usuario == bduser && data.constraseña == bdpasswd) {
             setData({ ...data, verific: 1 });
-            navigate('Home');
+            dispatch(authActions.login( {
+              nombreUsuario: data.usuario,
+              rol: 'administrador'
+            }))
+            navigate("/Home")
         } else {
             setData({ ...data, verific: 2 });
             navigate('Reports');
         }  
     }
 
-    
-
  return (
-
     <Box onSubmit={handleSubmit} sx={{ padding: '20px' }} component="form">
         <TextField
             required
@@ -59,10 +62,7 @@ function Login() {
             )
         )
         }
-
-
     </Box>
-
  )
 }
 
